@@ -1,0 +1,72 @@
+package prova_pooa;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+
+/*Você deverá resolver o seguinte problema. Suponha que uma fábrica produza
+peças. Há dois tipos de peças, as simples e as compostas. Cada peça simples possui
+um nome e um valor, além de outras características que para o nosso problema não
+são relevantes. Cada peça composta c é constituída de uma lista de pares ( p , m ),
+onde p é uma peça e m é o número de cópias de p necessárias para se obter c.
+O valor de uma peça composta é a soma do valor de suas peças constituintes,
+levando-se em conta a multiplicidade de cada uma de tais peças. O seu sistema,
+além de evidentemente representar computacionalmente a descrição acima, deverá
+satisfazer os requisitos que seguem*/
+
+
+public abstract class Peca {
+	private static Map<String, Peca> database = new HashMap<>();
+	public String name;
+	public int value;
+	private String getName() {
+		return this.name;
+	}
+	
+	public abstract boolean ehSimples();
+
+	private static class PecaSimples extends Peca {
+		public PecaSimples(String name, int value) {
+			this.name = name;
+			this.value = value;
+		}
+		private int getValue() {
+			return this.value;
+		}
+		public boolean ehSimples() { return true; }
+	}
+
+	private static class Pair {
+		public final Peca peca;
+		public final int copias;
+		public Pair(Peca peca, int copias){
+			this.peca = peca;
+			this.copias = copias;
+		}
+	}
+
+	private static class PecaComposta extends Peca{
+		public ArrayList<Pair> pairList = new ArrayList<>();
+		private int getValue() {
+			// verificar a lista e somar as simples e compostas
+			return this.value;
+		}
+		
+		public void addSubPeca(Peca peca, int copiass) {
+			
+		}
+		
+		public boolean ehSimples() { return false; }
+	}
+	
+	public static void constroi(String nomeArq) throws FileNotFoundException {
+		try (Scanner s = new Scanner(new FileReader(nomeArq))) {
+			
+		}
+	}
+
+}
